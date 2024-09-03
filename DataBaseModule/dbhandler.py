@@ -6,7 +6,7 @@ def throwException(exception_text : str) -> None:
     print(f"Exception raised in database handler routine.\nMessage:<{exception_text}>.")
     exit(1)
 
-# All interactions with the db is encapsulated into this class
+# All interaction with the db is encapsulated into this class
 class DBHandler:
     
     def __init__(self, params : dict, debug : bool = False) -> None:
