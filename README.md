@@ -6,5 +6,4 @@ server application + REST API, microservice architecture
 ## This is a work-in-progress application  
 
 ## Database Module (functional)  
-A platform which provides a Postgres interface for other modules.  
-Also provides an api for explicit Postgres calls (powered by Flask).  
+A platform which provides a Postgres interface for other modules through an api that is available locally (powered by Flask).    
