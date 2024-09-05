@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# THIS IS AN OBSOLETE TEMPLATE, SOON TO BE REMADE
+
 # some magic bullshit so that the script can see global aliases
 shopt -s expand_aliases
 source /root/.bashrc

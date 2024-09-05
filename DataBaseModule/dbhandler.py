@@ -97,10 +97,27 @@ class DBHandler:
 
     # This method returns names and types of the attributes of the table entries
     # Example: (id : INT), (entry : TEXT)
-    def printTableSctructure() -> None:
-        pass
-        # todo
-                    
+    def getTableStructure(self, table_name : str) -> list:
+        
+        self.executeQuery(f"""SELECT * FROM {table_name} LIMIT 1;""")
+        
+        result = self.fetchQueryResult()
+        colnames = [desc[0] for desc in self._curs.description]
+        
+        structure = list()
+
+        if (len(result) == 0):
+            
+            for i in range(0, len(colnames)):
+                structure.append({colnames[i] : 'undef'})
+            
+            return structure
+
+        for i in range(0, len(colnames)):
+            structure.append({colnames[i] : str(type(result[0][i]))})
+    
+        return structure                
+
     # This method prints out the ENTIRE table, 
     # please use with caution for tables with large number of entries
     def printTable(self, table_name : str) -> None:

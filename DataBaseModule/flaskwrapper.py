@@ -16,11 +16,11 @@ class FlaskAppWrapper:
         for config, value in configs:
             self.app.config[config.upper()] = value    
 
-    def addEndpoint(self, endpoint=None, endpoint_name=None,
-        handler=None, methods=['GET'], *args, **kwargs):
+    def addEndpoint(self, view_func, endpoint=None, endpoint_name=None, 
+        methods=['GET'], **defaults):
         
-        self.app.add_url_rule(endpoint, endpoint_name, handler, 
-            methods=methods, *args, **kwargs)
+        self.app.add_url_rule(endpoint, endpoint_name, 
+            view_func=view_func, defaults=defaults)
 
     def run(self, **kwargs):
         
