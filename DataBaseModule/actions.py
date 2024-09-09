@@ -28,3 +28,50 @@ def getTableStruct(defaults : dict):
 
     
     return jsonify(res)
+
+# Executes a query via given DBHandler object and returns the result
+def executeQuery(defaults : dict):
+
+    # for debug purposes
+    print('ENTERED THE EXECUTION')
+    
+    handler = defaults['handler']
+
+    try:
+
+        content = request.data
+
+        if 'query' not in content:
+            return jsonify({'error' : 'bad request'})
+
+        query = content['query']
+
+        print(query)
+        
+        if 'commit' in requests.args:
+            
+            commit_line = requests.args.get('commit')
+            if commit_line.upper() == 'TRUE':
+                commit = True
+            else:
+                commit = False
+
+        else:
+        
+            commit = False
+        
+        # for debug purposes
+        print(f"commit arg exists: {commit}")
+
+        handler.executeQuery(query=query, commit=commit)
+
+        res = handler.fetchQueryResult()
+
+    except Exception as e:
+        
+        print(e)
+
+        res = {'critical error' : 'dbhandler'}
+
+    return jsonify(res)
+

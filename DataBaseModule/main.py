@@ -21,6 +21,7 @@ def main():
     server = apiserver.Server()
     
     server.enableGetActions()
+    server.enablePutActions()
 
     server.run()
 

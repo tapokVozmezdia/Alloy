@@ -33,6 +33,10 @@ class Server:
         self.app.addEndpoint(actions.getTableStruct, '/api/v1/tableStruct', 
             'tableStruct', methods=['GET'], defaults={'handler' : self.handler})
     
+    def enablePutActions(self) -> None:
+        
+        self.app.addEndpoint(actions.executeQuery, '/api/v1/execute', 'execute',
+            methods=['GET', 'PUT'], defaults={'handler' : self.handler})    
 
     def run(self, debug : bool = True) -> None:
         
