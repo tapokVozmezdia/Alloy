@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # This is a script for the separate launch of the database module,
-# with working REST API on localhost.
+# with working internal API on localhost.
 # For specifics check the README file
 
 # This script automatically creates python venv and downloads the needed packages.

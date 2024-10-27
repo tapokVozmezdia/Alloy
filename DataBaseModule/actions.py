@@ -2,6 +2,8 @@
 # after reaching specific endpoints
 
 from flask import jsonify, request
+
+import json
 import dbhandler
 
 # An action for debugging purposes
@@ -30,27 +32,33 @@ def getTableStruct(defaults : dict):
     return jsonify(res)
 
 # Executes a query via given DBHandler object and returns the result
+# !! requires payload to be delivered in a json format, 
+# preferably with json.dumps !!
 def executeQuery(defaults : dict):
 
     # for debug purposes
-    print('ENTERED THE EXECUTION')
+    print('EXECUTE CALLED')
     
     handler = defaults['handler']
 
     try:
-
-        content = request.data
+        
+        content = json.loads(request.data)
+        
+        #content = dict(content)
+        #print(content)
 
         if 'query' not in content:
             return jsonify({'error' : 'bad request'})
-
+        
         query = content['query']
-
+        #query = "SELECT * FROM test;"
+        
         print(query)
         
-        if 'commit' in requests.args:
+        if 'commit' in request.args:
             
-            commit_line = requests.args.get('commit')
+            commit_line = request.args.get('commit')
             if commit_line.upper() == 'TRUE':
                 commit = True
             else:

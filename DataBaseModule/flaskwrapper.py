@@ -18,9 +18,9 @@ class FlaskAppWrapper:
 
     def addEndpoint(self, view_func, endpoint=None, endpoint_name=None, 
         methods=['GET'], **defaults):
-        
+
         self.app.add_url_rule(endpoint, endpoint_name, 
-            view_func=view_func, defaults=defaults)
+            view_func=view_func, methods=methods, defaults=defaults)
 
     def run(self, **kwargs):
         

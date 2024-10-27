@@ -69,12 +69,19 @@ class DBHandler:
     # If line_num = -1 (default value), the method returns a full list
     def fetchQueryResult(self, line_num : int = -1) -> list:
         
-        result = self._curs.fetchall()
+        try: 
+            result = self._curs.fetchall()
         
-        if (line_num > len(result) or line_num < 0):
-            line_num = len(result)
+            if (line_num > len(result) or line_num < 0):
+                line_num = len(result)
 
-        result = result[:line_num]
+            result = result[:line_num]
+
+        except Exception as e:
+
+            print(e)
+
+            result = [{'empty result' : 'nothing to fetch'}]
 
         return result
 
@@ -82,7 +89,8 @@ class DBHandler:
     def printQueryResult(self) -> None:
         
         colnames = [desc[0] for desc in self._curs.description]
-        result = self._curs.fetchall()
+        #result = self._curs.fetchall()
+        result = self.fetchQueryResult()
 
         print("")
         for attr_name in colnames:

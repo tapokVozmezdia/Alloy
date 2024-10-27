@@ -1,4 +1,5 @@
-# An implementation of REST API server based on a flask wrapper
+# An implementation of an internal API server based on a flask wrapper
+# For specifics chech *TODO* file
 
 import os
 import json
@@ -36,7 +37,7 @@ class Server:
     def enablePutActions(self) -> None:
         
         self.app.addEndpoint(actions.executeQuery, '/api/v1/execute', 'execute',
-            methods=['GET', 'PUT'], defaults={'handler' : self.handler})    
+            methods=['GET','POST','PUT'], defaults={'handler' : self.handler})    
 
     def run(self, debug : bool = True) -> None:
         
